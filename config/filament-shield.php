@@ -38,8 +38,8 @@ return [
             'replicate',
             'reorder',*/
             'delete',
-           /* 'delete_any',
-            'force_delete',
+            'delete_any',
+            /*'force_delete',
             'force_delete_any',*/
         ],
 
@@ -51,7 +51,7 @@ return [
         'pages' => true,
         'widgets' => true,
         'resources' => true,
-        'custom_permissions' => false,
+        'custom_permissions' => true,
     ],
 
     'generator' => [

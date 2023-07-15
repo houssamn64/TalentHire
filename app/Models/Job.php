@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Job extends Model
 {
@@ -12,6 +14,14 @@ class Job extends Model
     protected $fillable = [
         'user_id', 'title', 'company', 'description', 'location', 'website', 'logo', 'email', 'tags',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function (Job $item) {
+            $item->user_id = Auth::user()->id;
+        });
+    }
 
     public function scopeFilter($query, array $filters)
     {

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::impersonate();
 // Authenticated Users Can Navigate to Any Routes
 Route::resource("jobs", JobController::class);
 Route::get('manage', [JobController::class, 'manage'])->name('jobs.manage');

@@ -195,6 +195,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Impersionate
+        Lab404\Impersonate\ImpersonateServiceProvider::class,
+
     ],
 
     /*

@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Spatie\Permission\Models\Role;
+use App\Models\Job;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RolePolicy
+class JobPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view_any_shield::role');
+        return $user->can('view_any_job');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Role $role)
+    public function view(User $user, Job $job)
     {
-        return $user->can('view_shield::role');
+        return $user->can('view_job');
     }
 
     /**
@@ -41,31 +41,31 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        return $user->can('create_shield::role');
+        return $user->can('create_job');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Role $role)
+    public function update(User $user, Job $job)
     {
-        return $user->can('update_shield::role');
+        return $user->can('update_job');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user, Job $job)
     {
-        return $user->can('delete_shield::role');
+        return $user->can('delete_job');
     }
 
     /**
@@ -76,17 +76,17 @@ class RolePolicy
      */
     public function deleteAny(User $user)
     {
-        return $user->can('delete_any_shield::role');
+        return $user->can('delete_any_job');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Role $role)
+    public function forceDelete(User $user, Job $job)
     {
         return true;
     }
@@ -106,10 +106,10 @@ class RolePolicy
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Role $role)
+    public function restore(User $user, Job $job)
     {
         return true;
     }
@@ -129,10 +129,10 @@ class RolePolicy
      * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user, Role $role)
+    public function replicate(User $user, Job $job)
     {
         return true;
     }

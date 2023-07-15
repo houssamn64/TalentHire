@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\JobResource\Pages;
 use App\Filament\Resources\JobResource\RelationManagers;
 use App\Models\Job;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -23,15 +24,12 @@ class JobResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
+/*                Forms\Components\TextInput::make('user_id')
                     ->numeric()
-                    ->required(),
+                    ->required(),*/
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TagsInput::make('tags')
-                    ->separator(',')
-                    ->required(),
                 Forms\Components\TextInput::make('company')
                     ->required()
                     ->maxLength(255),
@@ -45,10 +43,21 @@ class JobResource extends Resource
                 Forms\Components\TextInput::make('website')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TagsInput::make('tags')
+                    ->separator(',')
+                    ->required(),
                 Forms\Components\Textarea::make('description')
                     ->required(),
-                Forms\Components\TextInput::make('logo')
-                    ->maxLength(255),
+                Forms\Components\FileUpload::make('logo')
+                    ->image()
+                    ->acceptedFileTypes(['image/png', 'image/jpg', 'image/jpeg', 'image/webp'])
+                    ->disk('public')
+                    ->directory('jobs/posts')
+                    ->visibility('public')
+                    ->enableDownload()
+                    ->enableOpen()
+                    ->imagePreviewHeight('100px')
+                    ->maxSize(10240),
             ]);
     }
 
@@ -56,7 +65,9 @@ class JobResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('user_id')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->getStateUsing(fn($record)=> User::query()->find($record->user_id)?->name),
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('tags'),
                 Tables\Columns\TextColumn::make('company'),

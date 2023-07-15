@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use STS\FilamentImpersonate\Impersonate;
 
-class UserResource extends Resource
+class UserResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = User::class;
 
@@ -47,6 +48,19 @@ class UserResource extends Resource
     protected function getTitle(): string
     {
         return trans('filament-user::user.resource.title.resource');
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'impersonate'
+        ];
     }
 
     public static function form(Form $form): Form
@@ -115,7 +129,8 @@ class UserResource extends Resource
 
         if(config('filament-user.impersonate')){
             $table->prependActions([
-                Impersonate::make('impersonate'),
+                Impersonate::make('impersonate')
+                ->visible(auth()->user()->can('impersonate_user')),
             ]);
         }
 

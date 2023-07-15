@@ -20,6 +20,7 @@
     @vite('resources/js/app.js')
 </head>
 <body class="mb-48">
+    <x-User.impersonate></x-User.impersonate>
     <nav class="flex justify-between items-center p-3 py-5">
         <a href="/"
             ><img class="w-24" src="{{ asset('images/larajobs-trans.svg') }}" alt="Larajobs" class="logo"
