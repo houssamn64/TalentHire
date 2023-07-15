@@ -66,6 +66,7 @@ class JobResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user_id')
+                    ->label(__('user name'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->getStateUsing(fn($record)=> User::query()->find($record->user_id)?->name),
                 Tables\Columns\TextColumn::make('title'),

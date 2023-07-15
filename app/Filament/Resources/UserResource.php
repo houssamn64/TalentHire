@@ -42,7 +42,7 @@ class UserResource extends Resource implements HasShieldPermissions
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('filament-user.group');
+        return __('settings');
     }
 
     protected function getTitle(): string
