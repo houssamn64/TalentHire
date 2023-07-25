@@ -19,7 +19,9 @@ class Job extends Model
     {
         parent::boot();
         static::creating(function (Job $item) {
-            $item->user_id = Auth::user()->id;
+            if($item->user_id == null){
+                $item->user_id = Auth::user()?->id;
+            }
         });
     }
 
