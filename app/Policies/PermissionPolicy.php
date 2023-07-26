@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-
+use Spatie\Permission\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class PermissionPolicy
 {
     use HandlesAuthorization;
 
@@ -18,18 +18,19 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view_any_user');
+        return $user->can('view_any_permission');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user)
+    public function view(User $user, Permission $permission)
     {
-        return $user->can('view_user');
+        return $user->can('view_permission');
     }
 
     /**
@@ -40,29 +41,31 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create_user');
+        return $user->can('create_permission');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user, Permission $permission)
     {
-        return $user->can('update_user');
+        return $user->can('update_permission');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user, Permission $permission)
     {
-        return $user->can('delete_user');
+        return $user->can('delete_permission');
     }
 
     /**
@@ -73,16 +76,17 @@ class UserPolicy
      */
     public function deleteAny(User $user)
     {
-        return $user->can('delete_any_user');
+        return $user->can('delete_any_permission');
     }
 
     /**
      * Determine whether the user can permanently delete.
      *
      * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user)
+    public function forceDelete(User $user, Permission $permission)
     {
         return $user->can('{{ ForceDelete }}');
     }
@@ -102,9 +106,10 @@ class UserPolicy
      * Determine whether the user can restore.
      *
      * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user)
+    public function restore(User $user, Permission $permission)
     {
         return $user->can('{{ Restore }}');
     }
@@ -121,12 +126,13 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can bulk restore.
+     * Determine whether the user can replicate.
      *
      * @param  \App\Models\User  $user
+     * @param  \Spatie\Permission\Models\Permission  $permission
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function replicate(User $user)
+    public function replicate(User $user, Permission $permission)
     {
         return $user->can('{{ Replicate }}');
     }
@@ -141,4 +147,5 @@ class UserPolicy
     {
         return $user->can('{{ Reorder }}');
     }
+
 }

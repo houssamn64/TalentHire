@@ -88,7 +88,7 @@ class RolePolicy
      */
     public function forceDelete(User $user, Role $role)
     {
-        return true;
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -99,7 +99,7 @@ class RolePolicy
      */
     public function forceDeleteAny(User $user)
     {
-        return true;
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -111,7 +111,7 @@ class RolePolicy
      */
     public function restore(User $user, Role $role)
     {
-        return true;
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -122,7 +122,7 @@ class RolePolicy
      */
     public function restoreAny(User $user)
     {
-        return true;
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -134,7 +134,7 @@ class RolePolicy
      */
     public function replicate(User $user, Role $role)
     {
-        return true;
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -145,7 +145,7 @@ class RolePolicy
      */
     public function reorder(User $user)
     {
-        return true;
+        return $user->can('{{ Reorder }}');
     }
 
 }

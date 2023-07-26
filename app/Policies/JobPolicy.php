@@ -88,7 +88,7 @@ class JobPolicy
      */
     public function forceDelete(User $user, Job $job)
     {
-        return true;
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -99,7 +99,7 @@ class JobPolicy
      */
     public function forceDeleteAny(User $user)
     {
-        return true;
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -111,7 +111,7 @@ class JobPolicy
      */
     public function restore(User $user, Job $job)
     {
-        return true;
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -122,7 +122,7 @@ class JobPolicy
      */
     public function restoreAny(User $user)
     {
-        return true;
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -134,7 +134,7 @@ class JobPolicy
      */
     public function replicate(User $user, Job $job)
     {
-        return true;
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -145,7 +145,7 @@ class JobPolicy
      */
     public function reorder(User $user)
     {
-        return true;
+        return $user->can('{{ Reorder }}');
     }
 
 }
