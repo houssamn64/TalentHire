@@ -8,9 +8,9 @@ use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -24,7 +24,7 @@ class PermissionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return __('settings');
     }

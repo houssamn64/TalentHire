@@ -15,11 +15,11 @@ class JobCount extends BaseWidget
         return [
             Card::make('Jobs', Job::query()->count())
                 ->description('Jobs Created')
-                ->descriptionIcon('heroicon-s-trending-up')
+                ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success'),
             Card::make('Users', User::query()->count())
                 ->description('Users Created')
-                ->descriptionIcon('heroicon-o-collection')
+                ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->color('warning'),
             Card::make('Roles', Role::query()->count())
                 ->description('Roles Created')
